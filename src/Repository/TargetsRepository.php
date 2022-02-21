@@ -42,7 +42,7 @@ class TargetsRepository extends ServiceEntityRepository
         }
 
         if (!empty($search->country)){
-            $query = $query->andWhere('c.id IN (:country)')->setParameter('country', $search->country);
+            $query = $query->andWhere('c.id IN (:countries)')->setParameter('country', $search->country);
         }
 
         $query = $query->getQuery();

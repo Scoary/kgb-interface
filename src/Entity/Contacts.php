@@ -38,7 +38,7 @@ class Contacts
     #[Assert\Type("string")]
     private $code_name;
 
-    #[ORM\ManyToOne(targetEntity: countries::class, inversedBy: 'contacts')]
+    #[ORM\ManyToOne(targetEntity: Countries::class, inversedBy: 'contacts')]
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     private $country;
