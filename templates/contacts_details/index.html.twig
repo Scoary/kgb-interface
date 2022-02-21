@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Détail du contact : {{contacts.codename}}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-decoration-underline mb-5">Détail du contact : {{ contacts.codename }}</h1>
+    <div class="container col-5 m-auto">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+                <tbody>
+                <tr>
+                    <th>Prénom :</th>
+                    <td>{{ contacts.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Nom :</th>
+                    <td>{{ contacts.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Date de naissance :</th>
+                    <td>{{ contacts.dateofbirth|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <th>Alias :</th>
+                    <td>{{ contacts.codename }}</td>
+                </tr>
+                <tr>
+                    <th>Nationalité :</th>
+                    <td>{{ contacts.Country }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-sm btn-warning text-center" href="{{ path('contacts') }}">retour</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Compétences {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Tableau des Compétences</h1>
+    <div class="container col-3">
+        <form class="my-3">
+            <h4 class="fs-5 text-center">Effectuer une recherche par nom</h4>
+            <div class="d-flex">
+                {{ form_widget(form.q) }}
+                <button class="ms-2 btn btn-outline-success">Rechercher</button>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <div class="d-flex justify-content-end mb-3">
+                {{ knp_pagination_sortable(skills, 'Trier par nom', 's.skill') }}
+            </div>
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">id </th>
+                    <th scope="col">Nom</th>
+                    <th class="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for skill in skills %}
+                    <tr>
+                        <th scope="row">{{ skill.id }}</th>
+                        <td>{{ skill.skill }}</td>
+                        <td class="d-flex justify-content-between">
+                            {% if app.user %}
+                                <a href="{{ path('skill_modify', {'id' : skill.id}) }}" class="btn btn-sm btn-warning col-5">Modifier</a>
+                                {{ include('skills/delete_form.html.twig') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="12">Il n'y a pas de compétence créée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(skills)}}
+        </div>
+        {% if app.user %}
+            <div class="text-center">
+                <a href="{{ path('skill_add') }}" type="button" class="btn btn-sm btn-outline-info">
+                    Ajouter une compétence <span class="badge bg-info">+</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

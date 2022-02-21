@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Cibles {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Tableau des Cibles</h1>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-3">
+        <form>
+        <h4 class="fs-5">Effectuer une recherche par nom</h4>
+        {{ form_widget(form.q) }}
+        <h4 class="fs-5 mt-2">Rechercher par pays</h4>
+        {{ form_widget(form.country) }}
+        <button type="submit" class="btn btn-primary mt-3 w-100">Filtrer</button>
+        </form>
+    </div>
+    <div class="col-md-9">
+        <div class="table-responsive">
+            <div class="d-flex justify-content-end mb-3">
+                {{ knp_pagination_sortable(targets, 'Trier par nom', 't.lastname') }}
+            </div>
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Date de naissance</th>
+                    <th scope="col">Nationalité</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for target in targets %}
+                    <tr>
+                        <th scope="row">{{ target.id }}</th>
+                        <td>{{ target.firstname }}</td>
+                        <td>{{ target.lastname }}</td>
+                        <td>{{ target.dateofbirth|date('d/m/Y') }}</td>
+                        <td>{{ target.country }}</td>
+                        <td class="d-flex justify-content-between">
+                            <a href="{{ path('targets_details', {'id' : target.id}) }}" class="btn btn-sm btn-success">En savoir plus</a>
+                            {% if app.user %}
+                                <a href="{{ path('target_modify', {'id' : target.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                                {{ include('targets_details/delete_form.html.twig') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="12">Il n'y a pas de cible pour le moment</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(targets)}}
+        </div>
+        {% if app.user %}
+            <div class="text-center">
+                <a href="{{ path('target_add') }}" type="button" class="btn btn-sm btn-outline-info">
+                    Ajouter une cible <span class="badge bg-info">+</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

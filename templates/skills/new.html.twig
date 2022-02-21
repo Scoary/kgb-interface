@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Ajouter une compétence {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Nouvelle Compétence</h1>
+
+    {{ include('skills/form.html.twig', {'button_label': ''}) }}
+{% endblock %}

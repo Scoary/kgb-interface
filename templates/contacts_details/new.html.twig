@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Ajouter un contact {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Nouveau Contact</h1>
+
+    {{ include('contacts_details/form.html.twig', {'button_label': ''}) }}
+{% endblock %}

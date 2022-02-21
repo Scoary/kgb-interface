@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Modifier le contact : {{ contact.codename }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Modifier le contact : {{ contact.codename }}</h1>
+
+    {{ include('contacts_details/form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}

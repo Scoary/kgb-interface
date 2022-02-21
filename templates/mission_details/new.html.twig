@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Ajouter une mission {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Nouvelle mission</h1>
+
+    {{ include('mission_details/form.html.twig', {'button_label': ''}) }}
+{% endblock %}

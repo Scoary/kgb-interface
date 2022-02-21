@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Modifier la planque : {{ stash.alias }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Modifier la planque : {{ stash.alias }}</h1>
+
+    {{ include('stashs_details/form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}

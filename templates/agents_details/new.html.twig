@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Ajouter un agent {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Nouvel Agent</h1>
+
+    {{ include('agents_details/form.html.twig', {'button_label': ''}) }}
+{% endblock %}

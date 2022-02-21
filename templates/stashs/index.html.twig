@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Planques {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Tableau des Planques</h1>
+    <div class="container">
+    <div class="row">
+    <div class="col-md-3">
+        <form>
+            <h4 class="fs-5">Effectuer une recherche par alias</h4>
+            {{ form_widget(form.q) }}
+            <h4 class="fs-5 mt-2">Rechercher par pays</h4>
+            {{ form_widget(form.country) }}
+            <button type="submit" class="btn btn-primary mt-3 w-100">Filtrer</button>
+        </form>
+    </div>
+    <div class="col-md-9">
+        <div class="d-flex justify-content-end mb-3">
+            {{ knp_pagination_sortable(stashs, 'Trier par Alias', 's.alias') }}
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">id </th>
+                    <th scope="col">Alias</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Pays</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for stash in stashs %}
+                    <tr>
+                        <th scope="row">{{ stash.id }}</th>
+                        <td>{{ stash.alias }}</td>
+                        <td>{{ stash.address }}</td>
+                        <td>{{ stash.country}}</td>
+                        <td>{{ stash.type }}</td>
+                        <td class="d-flex flex-column justify-content-between">
+                            <a href="{{ path('stashs_details', {'id' : stash.id}) }}" class="btn btn-sm btn-success mb-2">En savoir plus</a>
+                            {% if app.user %}
+                                <a href="{{ path('stash_modify', {'id' : stash.id}) }}" class="btn btn-sm btn-warning mb-2">Modifier</a>
+                                {{ include('stashs_details/delete_form.html.twig') }}
+
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <td colspan="12">Il n'y a pas de Planque pour le moment</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ knp_pagination_render(stashs)}}
+        </div>
+        {% if app.user %}
+            <div class="text-center">
+                <a href="{{ path('stash_add') }}" type="button" class="btn btn-sm btn-outline-info mb-4">
+                    Ajouter une planque <span class="badge bg-info">+</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+{% endblock %}

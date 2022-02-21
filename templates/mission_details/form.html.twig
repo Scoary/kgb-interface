@@ -1,0 +1,18 @@
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="container col-6">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col">{{ form_row(form.start_date) }}</div>
+            <div class="col">{{ form_row(form.end_date) }}</div>
+        </div>
+        {{ form_rest(form) }}
+        <div class="container text-center">
+        <button class="btn btn-lg mb-5 btn-success text-center">{{ button_label|default('Ajouter') }}</button>
+        {{ form_end(form) }}
+        <a href="{{ path('home') }}" class="btn btn-lg btn-warning mb-5 text-center">Retour</a>
+        </div>
+    </div>
+
+{% endblock %}

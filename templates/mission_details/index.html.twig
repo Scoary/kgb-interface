@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Détail de la mission : {{ missions.title }}{% endblock %}
+
+{% block content %}
+<h1 class="text-center text-decoration-underline mb-5">Détail de la mission : {{ missions.title }}</h1>
+    <div class="container col-5 m-auto">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+                <tbody>
+                    <tr>
+                        <th>Titre :</th>
+                        <td>{{ missions.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom de code :</th>
+                        <td>{{ missions.codename }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description :</th>
+                        <td>{{ missions.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Statut de la mission : </th>
+                        <td>
+                            <span class="badge rounded-pill bg-info text-dark">{{ missions.statusmission }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Début de la mission : </th>
+                        <td>{{ missions.startdate|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fin de la mission : </th>
+                        <td>{{ missions.enddate|date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Spécialité requise : </th>
+                        <td>{{ missions.skill }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type de mission : </th>
+                        <td>{{ missions.missiontype }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pays : </th>
+                        <td>{{ missions.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Cible(s) : </th>
+
+                            <td>
+                                {% for mission in missions.targets  %}
+                                    &#x2022; {{ mission.firstname }} {{ mission.lastname }}<br>
+                                {% endfor %}
+                            </td>
+
+                    </tr>
+                    <tr>
+                        <th>Planque : </th>
+                        {% for mission in missions.stashs  %}
+                            <td>{{ mission.alias }} | {{ mission.address }} - {{ mission.country }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <th>Agent(s) : </th>
+
+                            <td> {% for mission in missions.agents  %}
+                                &#x2022; {{ mission.firstname }} {{ mission.lastname }}, alias {{ mission.alias}} | {{ mission.country }}<br>
+                                {% endfor %}
+                            </td>
+                    </tr>
+                    <tr>
+                        <th>Contact(s) : </th>
+                            <td>
+                                {% for mission in missions.contacts  %}
+                                    &#x2022; {{ mission.firstname }} {{ mission.lastname }}, alias {{ mission.codename}} | {{ mission.country }}<br>
+                                {% endfor %}
+                            </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+        <a class="btn btn-sm btn-warning text-center" href="{{ path('home') }}">retour</a>
+        </div>
+    </div>
+{% endblock %}

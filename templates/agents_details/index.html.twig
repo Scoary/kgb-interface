@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Détail de l'agent : {{agents.alias}}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-decoration-underline mb-5">Détail de l'agent : {{ agents.alias }}</h1>
+    <div class="container col-5 m-auto">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+                <tbody>
+                <tr>
+                    <th>Prénom :</th>
+                    <td>{{ agents.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Nom :</th>
+                    <td>{{ agents.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Date de naissance :</th>
+                    <td>{{ agents.dateofbirth|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <th>Alias :</th>
+                    <td>{{ agents.alias }}</td>
+                </tr>
+                <tr>
+                    <th>Nationalité :</th>
+                    <td>{{ agents.Country }}</td>
+                </tr>
+                <tr>
+                    <th>Compétence(s) : </th>
+                    <td>{% for agent in agents.skills  %}
+                            &#x2022; {{ agent.Skill }}<br>
+                    {% endfor %}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-sm btn-warning text-center" href="{{ path('agents') }}">retour</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KGB - Détail de la cible : {{targets.alias}}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center text-decoration-underline mb-5">Détail de la cible : {{ targets.alias }}</h1>
+    <div class="container col-5 m-auto">
+        <div class="table-responsive">
+            <table class="table table-hover table-dark">
+                <tbody>
+                <tr>
+                    <th>Prénom :</th>
+                    <td>{{ targets.firstname }}</td>
+                </tr>
+                <tr>
+                    <th>Nom :</th>
+                    <td>{{ targets.lastname }}</td>
+                </tr>
+                <tr>
+                    <th>Date de naissance :</th>
+                    <td>{{ targets.dateofbirth|date('d/m/Y') }}</td>
+                </tr>
+                <tr>
+                    <th>Alias :</th>
+                    <td>{{ targets.alias }}</td>
+                </tr>
+                <tr>
+                    <th>Nationalité :</th>
+                    <td>{{ targets.Country }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-sm btn-warning text-center" href="{{ path('targets') }}">retour</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} KGB - Modifier la cible : {{ target.alias }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Modifier la cible : {{ target.alias }}</h1>
+
+    {{ include('targets_details/form.html.twig', {'button_label': 'Modifier'}) }}
+
+{% endblock %}
